@@ -1,10 +1,24 @@
 import React from 'react'
+import AddTodoButton from './components/AddTodoButton'
+import TodoCard from './components/TodoCard'
 
 function App() {
   return (
     <div>
-      <h1 className="f1">welcome to Errands</h1>
-      <p>Feel free to create your new list of errands!</p>
+      <header className="tc mv4">
+        <h1 className="f2">Welcome to the Errands app</h1>
+        <p>Feel free to create your new list of errands!</p>
+      </header>
+      <section className="flex flex-wrap ph4 justify-center">
+        <AddTodoButton />
+        <TodoCard />
+        <TodoCard />
+        <TodoCard />
+        <TodoCard />
+        <TodoCard />
+        <TodoCard />
+        <TodoCard />
+      </section>
     </div>
   )
 }
