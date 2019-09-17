@@ -3,6 +3,16 @@ import AddTodoButton from './components/AddTodoButton'
 import TodoCard from './components/TodoCard'
 
 function App() {
+  const dummyData = [
+    {
+      title: 'leon',
+      tasks: ['task 1', 'task 2']
+    },
+    {
+      title: 'chung',
+      tasks: ['task 1', 'task 2']
+    }
+  ]
   return (
     <div>
       <header className="tc mv4">
@@ -14,23 +24,10 @@ function App() {
         style={{ margin: 'auto' }}
       >
         <AddTodoButton />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
+
+        {dummyData.map((data, idx) => {
+          return <TodoCard key={idx} title={data.title} />
+        })}
       </section>
     </div>
   )
