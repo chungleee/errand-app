@@ -1,38 +1,32 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import Modal from 'react-modal'
 import Header from './components/Header'
 import TodoList from './components/TodoList'
 import AddTodoButton from './components/AddTodoButton'
 
 Modal.setAppElement('#root')
+const App = () => {
+  const [modal, setModal] = useState(false)
 
-class App extends Component {
-  state = {
-    showModal: false
+  const handleOpenModal = () => {
+    setModal(true)
   }
 
-  handleOpenModal = () => {
-    this.setState({ showModal: true })
+  const handleCloseModal = () => {
+    setModal(false)
   }
-
-  handleCloseModal = () => {
-    this.setState({ showModal: false })
-  }
-
-  render() {
-    return (
-      <div>
-        <Header />
-        <TodoList>
-          <AddTodoButton
-            showModal={this.state.showModal}
-            handleCloseModal={this.handleCloseModal}
-            handleOpenModal={this.handleOpenModal}
-          />
-        </TodoList>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <Header />
+      <TodoList>
+        <AddTodoButton
+          showModal={modal}
+          handleCloseModal={handleCloseModal}
+          handleOpenModal={handleOpenModal}
+        />
+      </TodoList>
+    </div>
+  )
 }
 
 export default App
