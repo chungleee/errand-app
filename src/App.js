@@ -8,22 +8,15 @@ Modal.setAppElement('#root')
 const App = () => {
   const [modal, setModal] = useState(false)
 
-  const handleOpenModal = () => {
-    setModal(true)
+  const handleModal = () => {
+    setModal(!modal)
   }
 
-  const handleCloseModal = () => {
-    setModal(false)
-  }
   return (
     <div>
       <Header />
       <TodoList>
-        <AddTodoButton
-          showModal={modal}
-          handleCloseModal={handleCloseModal}
-          handleOpenModal={handleOpenModal}
-        />
+        <AddTodoButton showModal={modal} handleModal={handleModal} />
       </TodoList>
     </div>
   )
