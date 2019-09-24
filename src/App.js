@@ -6,17 +6,11 @@ import AddTodoButton from './components/AddTodoButton'
 
 Modal.setAppElement('#root')
 const App = () => {
-  const [modal, setModal] = useState(false)
-
-  const handleModal = () => {
-    setModal(!modal)
-  }
-
   return (
     <div>
       <Header />
       <TodoList>
-        <AddTodoButton showModal={modal} handleModal={handleModal} />
+        <AddTodoButton />
       </TodoList>
     </div>
   )

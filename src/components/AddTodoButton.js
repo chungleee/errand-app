@@ -1,7 +1,13 @@
 import React, { useState } from 'react'
 import Modal from 'react-modal'
 
-const AddTodoButton = ({ handleModal, showModal }) => {
+const AddTodoButton = () => {
+  const [modal, setModal] = useState(false)
+
+  const handleModal = () => {
+    setModal(!modal)
+  }
+
   return (
     <div>
       <button
@@ -10,7 +16,7 @@ const AddTodoButton = ({ handleModal, showModal }) => {
       >
         +
       </button>
-      <Modal onRequestClose={handleModal} isOpen={showModal}>
+      <Modal onRequestClose={handleModal} isOpen={modal}>
         <h1 className="f2 tc">Organise your errands</h1>
         <form className="mt3 mw6-ns flex flex-column items-center">
           <input
