@@ -2,15 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Modal from 'react-modal'
 import { list } from 'postcss'
 
-const AddTodoButton = () => {
-  // MODAL
-  // modal state
-  const [modal, setModal] = useState(false)
-  // modal trigger func
-  const handleModal = () => {
-    setModal(!modal)
-  }
-
+const AddTodoButton = ({ handleModal, modal }) => {
   // FORM
   // title state
   const [title, setTitle] = useState('')
