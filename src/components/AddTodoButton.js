@@ -61,6 +61,10 @@ const AddTodoButton = ({ handleModal, modal }) => {
       } else {
         // true - stringify - save
         localStorage.setItem(title, JSON.stringify(newErrand))
+        // clear all states
+        setTitle('')
+        setTask('')
+        setTasks([])
         // close modal
         handleModal()
       }
