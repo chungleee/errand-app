@@ -62,13 +62,18 @@ const AddTodoButton = ({ handleModal, modal }) => {
         // true - stringify - save
         localStorage.setItem(title, JSON.stringify(newErrand))
         // clear all states
-        setTitle('')
-        setTask('')
-        setTasks([])
+        handleReset()
         // close modal
         handleModal()
       }
     }
+  }
+
+  // reset states
+  const handleReset = () => {
+    setTitle('')
+    setTask('')
+    setTasks([])
   }
 
   return (
@@ -79,7 +84,13 @@ const AddTodoButton = ({ handleModal, modal }) => {
       >
         +
       </button>
-      <Modal onRequestClose={handleModal} isOpen={modal}>
+      <Modal
+        onRequestClose={() => {
+          handleReset()
+          handleModal()
+        }}
+        isOpen={modal}
+      >
         <h1 className="f2 tc">Organise your errands</h1>
         <div
           className="mt3 mb3 mw6-ns flex flex-column items-center"
