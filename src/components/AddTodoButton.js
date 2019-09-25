@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Modal from 'react-modal'
-import { list } from 'postcss'
+import InputField from './InputField'
 
 const AddTodoButton = ({ handleModal, modal }) => {
   // FORM
@@ -26,7 +26,7 @@ const AddTodoButton = ({ handleModal, modal }) => {
   // add task
   const handleAddTask = () => {
     if (task.length > 0) {
-      setTasks([...tasks, task])
+      setTasks([...tasks, task.trim()])
       setTask('')
     } else {
       return null
@@ -43,41 +43,52 @@ const AddTodoButton = ({ handleModal, modal }) => {
       </button>
       <Modal onRequestClose={handleModal} isOpen={modal}>
         <h1 className="f2 tc">Organise your errands</h1>
-        <div className="mt3 mw6-ns flex flex-column items-center">
-          <input
+        <div
+          className="mt3 mb3 mw6-ns flex flex-column items-center"
+          style={{ marginLeft: 'auto', marginRight: 'auto' }}
+        >
+          <InputField
             type="text"
             name="title"
             value={title}
-            onChange={handleGetValue}
+            placeholder="Title"
             className="input-reset mb2 w-75 h2 f3 tc tracked fw6 i"
             style={{ border: 'none', borderBottom: '1px solid black' }}
-            placeholder="Title"
+            onChange={handleGetValue}
           />
-          <input
+
+          <InputField
             type="text"
             name="task"
             value={task}
+            placeholder="Task"
+            className="input-reset mb3 w-75 h2 f6 tc tracked fw6 i"
+            style={{ border: 'none', borderBottom: '1px solid black' }}
+            onChange={handleGetValue}
             onKeyPress={event => {
               if (event.key === 'Enter') {
                 handleAddTask()
               }
             }}
-            onChange={handleGetValue}
-            className="input-reset w-75 h2 f6 tc tracked fw6 i"
-            style={{ border: 'none', borderBottom: '1px solid black' }}
-            placeholder="Task"
           />
-          <button onClick={handleAddTask}>add</button>
+          <div>
+            <button onClick={handleAddTask}>add</button>
+            <button>save</button>
+          </div>
         </div>
         <div>
-          <h1 className="f2">{title}</h1>
-          <ul>
+          <h1 className="f2 tc">{title}</h1>
+          <ol className="list pl0 tc">
             {tasks.length <= 0
               ? null
               : tasks.map((task, idx) => {
-                  return <li key={idx}>{task}</li>
+                  return (
+                    <li className="pa1" key={idx}>
+                      {task}
+                    </li>
+                  )
                 })}
-          </ul>
+          </ol>
         </div>
       </Modal>
     </div>
