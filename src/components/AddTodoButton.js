@@ -33,8 +33,12 @@ const AddTodoButton = () => {
 
   // add task
   const handleAddTask = () => {
-    setTasks([...tasks, task])
-    setTask('')
+    if (task.length > 0) {
+      setTasks([...tasks, task])
+      setTask('')
+    } else {
+      return null
+    }
   }
 
   return (
