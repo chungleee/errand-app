@@ -3,6 +3,15 @@ import Modal from 'react-modal'
 import InputField from './InputField'
 
 const AddTodoButton = ({ handleModal, modal }) => {
+  // styling
+  const styles = {
+    inputs: {
+      border: 'none',
+      borderBottom: '1px solid black'
+    },
+    inputControl: { marginLeft: 'auto', marginRight: 'auto' }
+  }
+
   // FORM
   // title state
   const [title, setTitle] = useState('')
@@ -33,6 +42,31 @@ const AddTodoButton = ({ handleModal, modal }) => {
     }
   }
 
+  // save task
+  const handleOnSave = () => {
+    // check if tasks empty
+    if (tasks.length === 0) {
+      // if true - do nothing
+      return alert(new Error('Cannot save an empty list of errands!'))
+    } else {
+      // else - continue - create errand obj
+      const newErrand = {
+        title,
+        tasks
+      }
+      // check if localStorage exists
+      // false - return
+      if (!window.localStorage) {
+        return alert(new Error("Sorry, storage isn't available right now."))
+      } else {
+        // true - stringify - save
+        localStorage.setItem(title, JSON.stringify(newErrand))
+        // close modal
+        handleModal()
+      }
+    }
+  }
+
   return (
     <div>
       <button
@@ -45,15 +79,15 @@ const AddTodoButton = ({ handleModal, modal }) => {
         <h1 className="f2 tc">Organise your errands</h1>
         <div
           className="mt3 mb3 mw6-ns flex flex-column items-center"
-          style={{ marginLeft: 'auto', marginRight: 'auto' }}
+          style={styles.inputControl}
         >
           <InputField
             type="text"
             name="title"
             value={title}
             placeholder="Title"
-            className="input-reset mb2 w-75 h2 f3 tc tracked fw6 i"
-            style={{ border: 'none', borderBottom: '1px solid black' }}
+            className="input-reset mb3 w-75 h2 f3 tc tracked fw6 i"
+            style={styles.inputs}
             onChange={handleGetValue}
           />
 
@@ -63,7 +97,7 @@ const AddTodoButton = ({ handleModal, modal }) => {
             value={task}
             placeholder="Task"
             className="input-reset mb3 w-75 h2 f6 tc tracked fw6 i"
-            style={{ border: 'none', borderBottom: '1px solid black' }}
+            style={styles.inputs}
             onChange={handleGetValue}
             onKeyPress={event => {
               if (event.key === 'Enter') {
@@ -72,8 +106,12 @@ const AddTodoButton = ({ handleModal, modal }) => {
             }}
           />
           <div>
-            <button onClick={handleAddTask}>add</button>
-            <button>save</button>
+            <button className="grow" onClick={handleAddTask}>
+              add
+            </button>
+            <button className="grow" onClick={handleOnSave}>
+              save
+            </button>
           </div>
         </div>
         <div>
