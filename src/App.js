@@ -15,31 +15,35 @@ const App = () => {
   }
 
   // ERRANDS
-  // errands state
   const [errands, setErrands] = useState([])
-  useEffect(() => {
-    // check if localstorage exists
+  // function to get data from localStorage
+  const fetchStorage = () => {
     if (!window.localStorage) {
-      return null
+      alert(new Error("Sorry, local storage isn't available right now"))
     } else {
-      // loop localstorage
       for (const key in localStorage) {
         if (localStorage.hasOwnProperty(key)) {
-          // parse each key
           const json = JSON.parse(localStorage[key])
-
-          // update state
           setErrands(errands.push(json))
         }
       }
     }
+    console.log(errands)
+  }
+
+  useEffect(() => {
+    fetchStorage()
   }, [])
 
   return (
     <div>
       <Header />
       <TodoList>
-        <AddTodoButton modal={modal} handleModal={handleModal} />
+        <AddTodoButton
+          fetchStorage={fetchStorage}
+          modal={modal}
+          handleModal={handleModal}
+        />
       </TodoList>
     </div>
   )
