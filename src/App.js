@@ -39,11 +39,7 @@ const App = () => {
     <div>
       <Header />
       <TodoList>
-        <AddTodoButton
-          fetchStorage={fetchStorage}
-          modal={modal}
-          handleModal={handleModal}
-        />
+        <AddTodoButton modal={modal} handleModal={handleModal} />
       </TodoList>
     </div>
   )
