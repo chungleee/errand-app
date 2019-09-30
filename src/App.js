@@ -14,11 +14,21 @@ const App = () => {
     setModal(!modal)
   }
 
+  // ERRANDS
+  const [tasks, setTasks] = useState([{ task: '', completed: false }])
+  // save tasks to localstorage
+  const handleOnSave = () => {}
+
   return (
     <div>
       <Header />
       <TodoList>
-        <AddTodoButton modal={modal} handleModal={handleModal} />
+        <AddTodoButton
+          modal={modal}
+          handleModal={handleModal}
+          tasks={tasks}
+          setTasks={setTasks}
+        />
       </TodoList>
     </div>
   )
