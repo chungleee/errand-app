@@ -3,6 +3,23 @@ import Modal from 'react-modal'
 import InputField from './InputField'
 
 const AddTodoButton = ({ handleModal, modal }) => {
+  const [tasks, setTasks] = useState([])
+
+  const useForm = initialValues => {
+    const [values, setValues] = useState(initialValues)
+
+    const handleOnChange = event => {
+      setValues({
+        ...values,
+        [event.target.name]: event.target.value
+      })
+    }
+
+    return [values, setValues, handleOnChange]
+  }
+
+  const [values, setValues, handleOnChange] = useForm({ title: '', task: '' })
+
   // styling
   const styles = {
     inputs: {
@@ -10,70 +27,6 @@ const AddTodoButton = ({ handleModal, modal }) => {
       borderBottom: '1px solid black'
     },
     inputControl: { marginLeft: 'auto', marginRight: 'auto' }
-  }
-
-  // FORM
-  // title state
-  const [title, setTitle] = useState('')
-
-  // single task state
-  const [task, setTask] = useState('')
-
-  // tasks array state
-  const [tasks, setTasks] = useState([])
-
-  // get value
-  const handleGetValue = event => {
-    if (event.target.name === 'title') {
-      setTitle(event.target.value)
-    }
-    if (event.target.name === 'task') {
-      setTask(event.target.value)
-    }
-  }
-
-  // add task
-  const handleAddTask = () => {
-    if (task.length > 0) {
-      setTasks([...tasks, task.trim()])
-      setTask('')
-    } else {
-      return null
-    }
-  }
-
-  // save task
-  const handleOnSave = () => {
-    // check if tasks empty
-    if (tasks.length === 0) {
-      // if true - do nothing
-      return alert(new Error('Cannot save an empty list of errands!'))
-    } else {
-      // else - continue - create errand obj
-      const newErrand = {
-        title,
-        tasks
-      }
-      // check if localStorage exists
-      // false - return
-      if (!window.localStorage) {
-        return alert(new Error("Sorry, storage isn't available right now."))
-      } else {
-        // true - stringify - save
-        localStorage.setItem(title, JSON.stringify(newErrand))
-        // clear all states
-        handleReset()
-        // close modal
-        handleModal()
-      }
-    }
-  }
-
-  // reset states
-  const handleReset = () => {
-    setTitle('')
-    setTask('')
-    setTasks([])
   }
 
   return (
@@ -86,7 +39,6 @@ const AddTodoButton = ({ handleModal, modal }) => {
       </button>
       <Modal
         onRequestClose={() => {
-          handleReset()
           handleModal()
         }}
         isOpen={modal}
@@ -97,40 +49,45 @@ const AddTodoButton = ({ handleModal, modal }) => {
           style={styles.inputControl}
         >
           <InputField
+            onChange={handleOnChange}
             type="text"
             name="title"
-            value={title}
+            value={values.title}
             placeholder="Title"
             className="input-reset mb3 w-75 h2 f3 tc tracked fw6 i"
             style={styles.inputs}
-            onChange={handleGetValue}
           />
 
           <InputField
+            onChange={handleOnChange}
             type="text"
             name="task"
-            value={task}
+            value={values.task}
             placeholder="Task"
             className="input-reset mb3 w-75 h2 f6 tc tracked fw6 i"
             style={styles.inputs}
-            onChange={handleGetValue}
             onKeyPress={event => {
               if (event.key === 'Enter') {
-                handleAddTask()
+                setTasks([...tasks, values.task])
+                setValues({ task: '' })
               }
             }}
           />
           <div>
-            <button className="grow" onClick={handleAddTask}>
+            <button
+              className="grow"
+              onClick={() => {
+                setTasks([...tasks, values.task])
+                setValues({ task: '' })
+              }}
+            >
               add
             </button>
-            <button className="grow" onClick={handleOnSave}>
-              save
-            </button>
+            <button className="grow">save</button>
           </div>
         </div>
         <div>
-          <h1 className="f2 tc">{title}</h1>
+          <h1 className="f2 tc">{values.title}</h1>
           <ol className="list pl0 tc">
             {tasks.length <= 0
               ? null
