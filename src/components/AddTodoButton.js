@@ -2,9 +2,7 @@ import React, { useState } from 'react'
 import Modal from 'react-modal'
 import InputField from './InputField'
 
-const AddTodoButton = ({ handleModal, modal }) => {
-  const [tasks, setTasks] = useState([])
-
+const AddTodoButton = ({ handleModal, modal, tasks, setTasks }) => {
   const useForm = initialValues => {
     const [values, setValues] = useState(initialValues)
 
@@ -68,8 +66,8 @@ const AddTodoButton = ({ handleModal, modal }) => {
             style={styles.inputs}
             onKeyPress={event => {
               if (event.key === 'Enter') {
-                setTasks([...tasks, values.task])
-                setValues({ task: '' })
+                setTasks([...tasks, { task: values.task }])
+                setValues({ ...values, task: '' })
               }
             }}
           />
@@ -77,8 +75,8 @@ const AddTodoButton = ({ handleModal, modal }) => {
             <button
               className="grow"
               onClick={() => {
-                setTasks([...tasks, values.task])
-                setValues({ task: '' })
+                setTasks([...tasks, { task: values.task }])
+                setValues({ ...values, task: '' })
               }}
             >
               add
@@ -91,13 +89,22 @@ const AddTodoButton = ({ handleModal, modal }) => {
           <ol className="list pl0 tc">
             {tasks.length <= 0
               ? null
+              : tasks.map((el, idx) => {
+                  return (
+                    <li className="pa1" key={idx}>
+                      {el.task}
+                    </li>
+                  )
+                })}
+            {/*tasks.length <= 0
+              ? null
               : tasks.map((task, idx) => {
                   return (
                     <li className="pa1" key={idx}>
                       {task}
                     </li>
                   )
-                })}
+                })*/}
           </ol>
         </div>
       </Modal>
