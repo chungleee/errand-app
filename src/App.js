@@ -15,9 +15,7 @@ const App = () => {
   }
 
   // ERRANDS
-  const [tasks, setTasks] = useState([{ task: '', completed: false }])
-  // save tasks to localstorage
-  const handleOnSave = () => {}
+  const [errands, setErrands] = useState([])
 
   return (
     <div>
@@ -26,8 +24,8 @@ const App = () => {
         <AddTodoButton
           modal={modal}
           handleModal={handleModal}
-          tasks={tasks}
-          setTasks={setTasks}
+          errands={errands}
+          setErrands={setErrands}
         />
       </TodoList>
     </div>
