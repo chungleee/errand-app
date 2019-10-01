@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Modal from 'react-modal'
 import InputField from './InputField'
 
-const AddTodoButton = ({ handleModal, modal, tasks, setTasks }) => {
+const AddTodoButton = ({ handleModal, modal, errands, setErrands }) => {
   const useForm = initialValues => {
     const [values, setValues] = useState(initialValues)
 
@@ -18,13 +18,12 @@ const AddTodoButton = ({ handleModal, modal, tasks, setTasks }) => {
 
   const [values, setValues, handleOnChange] = useForm({ title: '', task: '' })
 
-  // styling
-  const styles = {
-    inputs: {
-      border: 'none',
-      borderBottom: '1px solid black'
-    },
-    inputControl: { marginLeft: 'auto', marginRight: 'auto' }
+  const [tasks, setTasks] = useState([])
+
+  // reset state
+  const handleReset = () => {
+    setValues({ title: '', task: '' })
+    setTasks([])
   }
 
   return (
@@ -66,7 +65,7 @@ const AddTodoButton = ({ handleModal, modal, tasks, setTasks }) => {
             style={styles.inputs}
             onKeyPress={event => {
               if (event.key === 'Enter') {
-                setTasks([...tasks, { task: values.task }])
+                setTasks([...tasks, values.task])
                 setValues({ ...values, task: '' })
               }
             }}
@@ -75,13 +74,26 @@ const AddTodoButton = ({ handleModal, modal, tasks, setTasks }) => {
             <button
               className="grow"
               onClick={() => {
-                setTasks([...tasks, { task: values.task }])
+                setTasks([...tasks, values.task])
                 setValues({ ...values, task: '' })
               }}
             >
               add
             </button>
-            <button className="grow">save</button>
+            <button
+              className="grow"
+              onClick={() => {
+                const newErrand = {
+                  title: values.title,
+                  errands: tasks
+                }
+                setErrands([...errands, newErrand])
+                handleReset()
+                handleModal()
+              }}
+            >
+              save
+            </button>
           </div>
         </div>
         <div>
@@ -89,27 +101,27 @@ const AddTodoButton = ({ handleModal, modal, tasks, setTasks }) => {
           <ol className="list pl0 tc">
             {tasks.length <= 0
               ? null
-              : tasks.map((el, idx) => {
-                  return (
-                    <li className="pa1" key={idx}>
-                      {el.task}
-                    </li>
-                  )
-                })}
-            {/*tasks.length <= 0
-              ? null
               : tasks.map((task, idx) => {
                   return (
                     <li className="pa1" key={idx}>
                       {task}
                     </li>
                   )
-                })*/}
+                })}
           </ol>
         </div>
       </Modal>
     </div>
   )
+}
+
+// styling
+const styles = {
+  inputs: {
+    border: 'none',
+    borderBottom: '1px solid black'
+  },
+  inputControl: { marginLeft: 'auto', marginRight: 'auto' }
 }
 
 export default AddTodoButton
