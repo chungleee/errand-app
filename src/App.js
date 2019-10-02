@@ -59,9 +59,13 @@ const App = () => {
           errands={errands}
           setErrands={setErrands}
         />
-        {storage.map((card, idx) => {
-          return <TodoCard title={card.title} key={idx} />
-        })}
+        {storage.length <= 0 ? (
+          <div>...loading errands</div>
+        ) : (
+          storage.map(({ title, errands }, idx) => {
+            return <TodoCard title={title} todos={errands} key={idx} />
+          })
+        )}
       </TodoList>
     </div>
   )
