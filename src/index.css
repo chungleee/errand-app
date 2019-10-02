@@ -2,4 +2,18 @@
 
 body {
   font-family: 'avenir next', avenir, sans-serif;
+  background-color: #f6fffe;
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 300ms ease-in;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
 }
