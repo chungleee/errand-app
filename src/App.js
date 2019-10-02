@@ -3,6 +3,7 @@ import Modal from 'react-modal'
 import Header from './components/Header'
 import TodoList from './components/TodoList'
 import AddTodoButton from './components/AddTodoButton'
+import TodoCard from './components/TodoCard'
 
 Modal.setAppElement('#root')
 const App = () => {
@@ -58,8 +59,8 @@ const App = () => {
           errands={errands}
           setErrands={setErrands}
         />
-        {storage.map(i => {
-          return JSON.stringify(i)
+        {storage.map((card, idx) => {
+          return <TodoCard title={card.title} key={idx} />
         })}
       </TodoList>
     </div>
