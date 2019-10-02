@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Modal from 'react-modal'
 import Header from './components/Header'
 import TodoList from './components/TodoList'
@@ -16,6 +16,37 @@ const App = () => {
 
   // ERRANDS
   const [errands, setErrands] = useState([])
+  // STORAGE VALUES
+  const [storage, setStorage] = useState([])
+
+  // component mount
+  useEffect(
+    () => {
+      handleGetItems()
+    },
+    // component updates depending if errands has been added
+    [errands]
+  )
+
+  const handleGetItems = () => {
+    // check if storage exists
+    // if false
+    if (!window.localStorage) {
+      return alert('Storage unavailable')
+    } else {
+      // if true
+      // loop thru localStorage
+      const keys = Object.keys(localStorage)
+      const json = keys.map(key => {
+        // get every item
+        const item = localStorage.getItem(key)
+        // parse json
+        return JSON.parse(item)
+      })
+      // setStorage
+      setStorage(json)
+    }
+  }
 
   return (
     <div>
@@ -27,6 +58,9 @@ const App = () => {
           errands={errands}
           setErrands={setErrands}
         />
+        {storage.map(i => {
+          return JSON.stringify(i)
+        })}
       </TodoList>
     </div>
   )
