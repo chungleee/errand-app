@@ -45,7 +45,7 @@ const AddTodoButton = ({ handleModal, modal, errands, setErrands }) => {
     <div>
       <button
         onClick={handleModal}
-        className="h4 w4 mr3 ba br4 flex items-center justify-center tc grow bg-white b--black"
+        className="h4 b w4 mr3 mb3 ba br4 flex items-center justify-center tc grow bg-white b--black"
       >
         +
       </button>
