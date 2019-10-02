@@ -3,6 +3,7 @@ import Modal from 'react-modal'
 import InputField from './InputField'
 
 const AddTodoButton = ({ handleModal, modal, errands, setErrands }) => {
+  // custom hook to get values
   const useForm = initialValues => {
     const [values, setValues] = useState(initialValues)
 
@@ -16,11 +17,25 @@ const AddTodoButton = ({ handleModal, modal, errands, setErrands }) => {
     return [values, setValues, handleOnChange]
   }
 
+  // input values and handler
   const [values, setValues, handleOnChange] = useForm({ title: '', task: '' })
 
+  // tasks to display in modal
   const [tasks, setTasks] = useState([])
 
-  // reset state
+  // save to localStorage
+  const handleSetItem = errandObj => {
+    // check if localstorage exists
+    if (!window.localStorage) {
+      // if false - return alert
+      return alert("Local Storage doesn't exist")
+    } else {
+      // if true - set item
+      localStorage.setItem(errandObj.title, JSON.stringify(errandObj))
+    }
+  }
+
+  // reset state func
   const handleReset = () => {
     setValues({ title: '', task: '' })
     setTasks([])
@@ -88,6 +103,7 @@ const AddTodoButton = ({ handleModal, modal, errands, setErrands }) => {
                   errands: tasks
                 }
                 setErrands([...errands, newErrand])
+                handleSetItem(newErrand)
                 handleReset()
                 handleModal()
               }}
