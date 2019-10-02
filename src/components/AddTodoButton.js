@@ -43,19 +43,20 @@ const AddTodoButton = ({ handleModal, modal, errands, setErrands }) => {
 
   return (
     <div>
-      <button
+      <div
         onClick={handleModal}
-        className="h4 b w4 mr3 mb3 ba br4 flex items-center justify-center tc grow bg-white b--black"
+        className="h4 b w4 mr3 mb3 ba br4 flex items-center justify-center tc grow .bg-washed-blue b--black"
       >
         +
-      </button>
+      </div>
       <Modal
         onRequestClose={() => {
           handleModal()
         }}
         isOpen={modal}
+        closeTimeoutMS={300}
       >
-        <h1 className="f2 tc">Organise your errands</h1>
+        <h1 className="f2 tc red">Organise your errands</h1>
         <div
           className="mt3 mb3 mw6-ns flex flex-column items-center"
           style={styles.inputControl}
