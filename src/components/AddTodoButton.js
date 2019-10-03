@@ -1,39 +1,15 @@
 import React, { useState } from 'react'
 import Modal from 'react-modal'
 import InputField from './InputField'
+import { handleSetItem } from '../utilities'
+import { useForm } from '../utilities/customHooks'
 
 const AddTodoButton = ({ handleModal, modal, errands, setErrands }) => {
-  // custom hook to get values
-  const useForm = initialValues => {
-    const [values, setValues] = useState(initialValues)
-
-    const handleOnChange = event => {
-      setValues({
-        ...values,
-        [event.target.name]: event.target.value
-      })
-    }
-
-    return [values, setValues, handleOnChange]
-  }
-
-  // input values and handler
+  // input values and handler from custom hook
   const [values, setValues, handleOnChange] = useForm({ title: '', task: '' })
 
   // tasks to display in modal
   const [tasks, setTasks] = useState([])
-
-  // save to localStorage
-  const handleSetItem = errandObj => {
-    // check if localstorage exists
-    if (!window.localStorage) {
-      // if false - return alert
-      return alert("Local Storage doesn't exist")
-    } else {
-      // if true - set item
-      localStorage.setItem(errandObj.title, JSON.stringify(errandObj))
-    }
-  }
 
   // reset state func
   const handleReset = () => {

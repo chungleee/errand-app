@@ -1,3 +1,4 @@
+// GET ALL ITEMS FROM LOCALSTORAGE
 export const handleGetItems = cb => {
   // check if storage exists
   // if false
@@ -15,5 +16,17 @@ export const handleGetItems = cb => {
     })
     // setStorage
     cb(json)
+  }
+}
+
+// SAVE ITEM TO LOCAL STORAGE
+export const handleSetItem = errandObj => {
+  // check if localstorage exists
+  if (!window.localStorage) {
+    // if false - return alert
+    return alert("Local Storage doesn't exist")
+  } else {
+    // if true - set item
+    localStorage.setItem(errandObj.title, JSON.stringify(errandObj))
   }
 }
