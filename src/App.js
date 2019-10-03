@@ -4,6 +4,7 @@ import Header from './components/Header'
 import TodoList from './components/TodoList'
 import AddTodoButton from './components/AddTodoButton'
 import TodoCard from './components/TodoCard'
+import { handleGetItems } from './utilities'
 
 Modal.setAppElement('#root')
 const App = () => {
@@ -23,31 +24,11 @@ const App = () => {
   // component mount
   useEffect(
     () => {
-      handleGetItems()
+      handleGetItems(setStorage)
     },
     // component updates depending if errands has been added
     [errands]
   )
-
-  const handleGetItems = () => {
-    // check if storage exists
-    // if false
-    if (!window.localStorage) {
-      return alert('Storage unavailable')
-    } else {
-      // if true
-      // loop thru localStorage
-      const keys = Object.keys(localStorage)
-      const json = keys.map(key => {
-        // get every item
-        const item = localStorage.getItem(key)
-        // parse json
-        return JSON.parse(item)
-      })
-      // setStorage
-      setStorage(json)
-    }
-  }
 
   return (
     <div>
