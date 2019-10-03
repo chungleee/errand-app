@@ -17,6 +17,11 @@ const AddTodoButton = ({ handleModal, modal, errands, setErrands }) => {
     setTasks([])
   }
 
+  const handleAdd = () => {
+    setTasks([...tasks, values.task])
+    setValues({ ...values, task: '' })
+  }
+
   return (
     <div>
       <div
@@ -57,19 +62,12 @@ const AddTodoButton = ({ handleModal, modal, errands, setErrands }) => {
             style={styles.inputs}
             onKeyPress={event => {
               if (event.key === 'Enter') {
-                setTasks([...tasks, values.task])
-                setValues({ ...values, task: '' })
+                handleAdd()
               }
             }}
           />
           <div>
-            <button
-              className="grow"
-              onClick={() => {
-                setTasks([...tasks, values.task])
-                setValues({ ...values, task: '' })
-              }}
-            >
+            <button className="grow" onClick={handleAdd}>
               add
             </button>
             <button
