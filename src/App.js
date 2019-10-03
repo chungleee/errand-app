@@ -18,6 +18,7 @@ const App = () => {
 
   // ERRANDS
   const [errands, setErrands] = useState([])
+
   // STORAGE VALUES
   const [storage, setStorage] = useState([])
 
@@ -43,7 +44,14 @@ const App = () => {
         {storage.length === 0
           ? null
           : storage.map(({ title, errands }, idx) => {
-              return <TodoCard title={title} todos={errands} key={idx} />
+              return (
+                <TodoCard
+                  setStorage={setStorage}
+                  title={title}
+                  todos={errands}
+                  key={idx}
+                />
+              )
             })}
       </TodoList>
     </div>
