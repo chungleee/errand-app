@@ -55,11 +55,23 @@ const TodoCard = ({ title, todos, setStorage }) => {
           <div className="pt3 pb3">
             <h1 className="f1 red">{title}</h1>
           </div>
-          <ul className="list pl0 mt3 mb3">
+          <ul className="list pl0 mt3 mb3 mw6-ns flex flex-column items-center">
             {todos.map((todo, idx) => {
               return (
-                <li className="mt1 mb1 pa2 f4" key={idx}>
-                  {todo}
+                <li
+                  onClick={() => {
+                    console.log(todo)
+                  }}
+                  className="mt1 mb1 pa2 f4 w-70"
+                  key={idx}
+                >
+                  <div className="flex justify-center items-center">
+                    <p style={{ wordWrap: 'break-word' }}>{todo.task}</p>
+                    <i
+                      style={{ marginLeft: 'auto' }}
+                      className="fas fa-check"
+                    ></i>
+                  </div>
                 </li>
               )
             })}
