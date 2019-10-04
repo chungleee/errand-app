@@ -18,7 +18,12 @@ const AddTodoButton = ({ handleModal, modal, errands, setErrands }) => {
   }
 
   const handleAdd = () => {
-    setTasks([...tasks, values.task])
+    const task = {
+      task: values.task,
+      completed: false
+    }
+    setTasks([...tasks, task])
+    // setTasks([...tasks, values.task])
     setValues({ ...values, task: '' })
   }
 
@@ -93,10 +98,10 @@ const AddTodoButton = ({ handleModal, modal, errands, setErrands }) => {
           <ol className="list pl0 tc">
             {tasks.length <= 0
               ? null
-              : tasks.map((task, idx) => {
+              : tasks.map((element, idx) => {
                   return (
                     <li className="pa1" key={idx}>
-                      {task}
+                      {element.task}
                     </li>
                   )
                 })}
