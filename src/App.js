@@ -25,6 +25,7 @@ const App = () => {
   // component mount
   useEffect(
     () => {
+      // gets items from storage on mount
       handleGetItems(setStorage)
     },
     // component updates depending if errands has been added
