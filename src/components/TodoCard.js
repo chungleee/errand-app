@@ -31,7 +31,7 @@ const TodoCard = ({ title, todos, setStorage }) => {
             cursor: 'pointer'
           }}
         >
-          x
+          <i className="fas fa-trash-alt"></i>
         </span>
         <div
           onClick={() => {

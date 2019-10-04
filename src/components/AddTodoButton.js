@@ -27,8 +27,9 @@ const AddTodoButton = ({ handleModal, modal, errands, setErrands }) => {
       <div
         onClick={handleModal}
         className="h4 b w4 mr3 mb3 ba br4 flex items-center justify-center tc grow .bg-washed-blue b--black"
+        style={{ cursor: 'pointer' }}
       >
-        +
+        <i className="fas fa-plus green"></i>
       </div>
       <Modal
         onRequestClose={() => {
