@@ -18,6 +18,18 @@ const TodoCard = ({ title, todos, setStorage }) => {
     handleGetItems(setStorage)
   }
 
+  // handle complete
+  const handleCompleted = todo => {
+    const storage = JSON.parse(localStorage.getItem(title))
+    storage.errands.forEach(errand => {
+      if (errand.task === todo.task) {
+        return (errand.completed = !errand.completed)
+      }
+    })
+    localStorage.setItem(title, JSON.stringify(storage))
+    handleGetItems(setStorage)
+  }
+
   return (
     <div>
       <div className="h4 w4 ba mr3 mb3 br4 flex items-center justify-center tc grow">
@@ -58,18 +70,22 @@ const TodoCard = ({ title, todos, setStorage }) => {
           <ul className="list pl0 mt3 mb3 mw6-ns flex flex-column items-center">
             {todos.map((todo, idx) => {
               return (
-                <li
-                  onClick={() => {
-                    console.log(todo)
-                  }}
-                  className="mt1 mb1 pa2 f4 w-70"
-                  key={idx}
-                >
+                <li className="mt1 mb1 pa2 f4 w-70" key={idx}>
                   <div className="flex justify-center items-center">
-                    <p style={{ wordWrap: 'break-word' }}>{todo.task}</p>
+                    <p
+                      className={todo.completed ? 'strike' : null}
+                      style={{ wordWrap: 'break-word' }}
+                    >
+                      {todo.task}
+                    </p>
                     <i
-                      style={{ marginLeft: 'auto' }}
-                      className="fas fa-check"
+                      onClick={() => {
+                        handleCompleted(todo)
+                      }}
+                      style={{ marginLeft: 'auto', cursor: 'pointer' }}
+                      className={
+                        todo.completed ? 'fas fa-check green' : 'fas fa-check'
+                      }
                     ></i>
                   </div>
                 </li>
