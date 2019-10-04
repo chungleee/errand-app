@@ -5,6 +5,7 @@ import TodoList from './components/TodoList'
 import AddTodoButton from './components/AddTodoButton'
 import TodoCard from './components/TodoCard'
 import { handleGetItems } from './utilities'
+import DeleteAllButton from './components/DeleteAllButton'
 
 Modal.setAppElement('#root')
 const App = () => {
@@ -42,6 +43,7 @@ const App = () => {
           errands={errands}
           setErrands={setErrands}
         />
+        <DeleteAllButton setStorage={setStorage} />
         {storage.length === 0
           ? null
           : storage.map(({ title, errands }, idx) => {
