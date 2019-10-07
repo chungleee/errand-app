@@ -32,16 +32,11 @@ const TodoCard = ({ title, todos, setStorage }) => {
 
   return (
     <div>
-      <div className="h4 w4 ba mr3 mb3 br4 flex items-center justify-center tc grow">
+      <div className={style.TodoCard}>
         <span
           onClick={handleDeleteItem}
-          className="red b"
-          style={{
-            position: 'absolute',
-            top: '10px',
-            right: '12px',
-            cursor: 'pointer'
-          }}
+          className={style.TodoCard_Icon}
+          style={style.TodoCard_Icon_style}
         >
           <i className="fas fa-trash-alt"></i>
         </span>
@@ -49,8 +44,8 @@ const TodoCard = ({ title, todos, setStorage }) => {
           onClick={() => {
             handleModal()
           }}
-          className="b flex items-center justify-center"
-          style={{ cursor: 'pointer', height: '90%', width: '90%' }}
+          className={style.TodoCard_Title}
+          style={style.TodoCard_Title_style}
         >
           {title}
         </div>
@@ -61,7 +56,7 @@ const TodoCard = ({ title, todos, setStorage }) => {
         }}
         isOpen={modal}
         closeTimeoutMS={300}
-        style={{ content: { backgroundColor: '#FFFCEB' } }}
+        style={style.TodoCard_Modal_style}
       >
         <section className="tc h-100 flex flex-column justify-center">
           <div className="pt3 pb3">
@@ -74,7 +69,7 @@ const TodoCard = ({ title, todos, setStorage }) => {
                   <div className="flex justify-center items-center">
                     <p
                       className={todo.completed ? 'strike' : null}
-                      style={{ wordWrap: 'break-word' }}
+                      style={{ wordWrap: 'break-word', marginLeft: 'auto' }}
                     >
                       {todo.task}
                     </p>
@@ -96,5 +91,19 @@ const TodoCard = ({ title, todos, setStorage }) => {
       </Modal>
     </div>
   )
+}
+
+const style = {
+  TodoCard: 'h4 w4 ba mr3 mb3 br4 flex items-center justify-center tc grow',
+  TodoCard_Icon: 'red b',
+  TodoCard_Icon_style: {
+    position: 'absolute',
+    top: '10px',
+    right: '12px',
+    cursor: 'pointer'
+  },
+  TodoCard_Title: 'b flex items-center justify-center',
+  TodoCard_Title_style: { cursor: 'pointer', height: '90%', width: '90%' },
+  TodoCard_Modal_style: { content: { backgroundColor: '#FFFCEB' } }
 }
 export default TodoCard
