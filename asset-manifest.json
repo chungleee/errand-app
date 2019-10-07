@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/errand-app/static/css/main.4e73ef05.chunk.css",
+    "main.js": "/errand-app/static/js/main.d93d518d.chunk.js",
+    "main.js.map": "/errand-app/static/js/main.d93d518d.chunk.js.map",
+    "runtime~main.js": "/errand-app/static/js/runtime~main.c0e1a857.js",
+    "runtime~main.js.map": "/errand-app/static/js/runtime~main.c0e1a857.js.map",
+    "static/css/2.31dafeb2.chunk.css": "/errand-app/static/css/2.31dafeb2.chunk.css",
+    "static/js/2.94638094.chunk.js": "/errand-app/static/js/2.94638094.chunk.js",
+    "static/js/2.94638094.chunk.js.map": "/errand-app/static/js/2.94638094.chunk.js.map",
+    "index.html": "/errand-app/index.html",
+    "precache-manifest.2f5b4e107c19c329d657b35eb7c3ce71.js": "/errand-app/precache-manifest.2f5b4e107c19c329d657b35eb7c3ce71.js",
+    "service-worker.js": "/errand-app/service-worker.js",
+    "static/css/2.31dafeb2.chunk.css.map": "/errand-app/static/css/2.31dafeb2.chunk.css.map",
+    "static/css/main.4e73ef05.chunk.css.map": "/errand-app/static/css/main.4e73ef05.chunk.css.map"
+  }
+}
