@@ -27,6 +27,14 @@ const AddTodoButton = ({ handleModal, modal, errands, setErrands }) => {
     setValues({ ...values, task: '' })
   }
 
+  // removes task from list
+  const handleRemove = taskToRemove => {
+    const editedTasks = tasks.filter(element => {
+      return element.task !== taskToRemove.task
+    })
+    setTasks([...editedTasks])
+  }
+
   return (
     <div>
       <div
@@ -95,13 +103,23 @@ const AddTodoButton = ({ handleModal, modal, errands, setErrands }) => {
         </div>
         <div>
           <h1 className="f2 tc">{values.title}</h1>
-          <ol className="list pl0 tc">
+          <ol className=" flex flex-column items-center list pl0 tc">
             {tasks.length <= 0
               ? null
               : tasks.map((element, idx) => {
                   return (
-                    <li className="pa1" key={idx}>
-                      {element.task}
+                    <li className="pa1 w-70" key={idx}>
+                      <div className="flex justify-center items-center">
+                        <p style={{ marginLeft: 'auto' }}>{element.task}</p>
+                        <i
+                          style={{ marginLeft: 'auto', cursor: 'pointer' }}
+                          onClick={() => {
+                            console.log('element', element)
+                            handleRemove(element)
+                          }}
+                          class="fas fa-minus-circle"
+                        ></i>
+                      </div>
                     </li>
                   )
                 })}
