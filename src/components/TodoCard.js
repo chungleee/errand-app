@@ -58,14 +58,17 @@ const TodoCard = ({ title, todos, setStorage }) => {
         closeTimeoutMS={300}
         style={style.TodoCard_Modal_style}
       >
-        <section className="tc h-100 flex flex-column justify-center">
+        <section className="tc h-100 flex flex-column justify-center ">
           <div className="pt3 pb3">
             <h1 className="f1 red">{title}</h1>
           </div>
-          <ul className="list pl0 mt3 mb3 mw6-ns flex flex-column items-center">
+          <ul
+            className="list pl0 mt3 mb3 flex flex-column items-center w-70 mw6-ns"
+            style={{ marginLeft: 'auto', marginRight: 'auto' }}
+          >
             {todos.map((todo, idx) => {
               return (
-                <li className="mt1 mb1 pa2 f4 w-70" key={idx}>
+                <li className="mt1 mb1 f4 w-70" key={idx}>
                   <div className="flex justify-center items-center">
                     <p
                       className={todo.completed ? 'strike' : null}
