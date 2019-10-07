@@ -23,7 +23,6 @@ const AddTodoButton = ({ handleModal, modal, errands, setErrands }) => {
       completed: false
     }
     setTasks([...tasks, task])
-    // setTasks([...tasks, values.task])
     setValues({ ...values, task: '' })
   }
 
@@ -65,7 +64,6 @@ const AddTodoButton = ({ handleModal, modal, errands, setErrands }) => {
             className="input-reset mb3 w-75 h2 f3 tc tracked fw6 i"
             style={styles.inputs}
           />
-
           <InputField
             onChange={handleOnChange}
             type="text"
@@ -75,26 +73,33 @@ const AddTodoButton = ({ handleModal, modal, errands, setErrands }) => {
             className="input-reset mb3 w-75 h2 f6 tc tracked fw6 i"
             style={styles.inputs}
             onKeyPress={event => {
-              if (event.key === 'Enter') {
+              if (
+                event.key === 'Enter' &&
+                event.target.value.trim().length !== 0
+              ) {
                 handleAdd()
               }
             }}
           />
-          <div>
+          <div className="mt3">
             <button className="grow" onClick={handleAdd}>
               add
             </button>
             <button
               className="grow"
               onClick={() => {
-                const newErrand = {
-                  title: values.title,
-                  errands: tasks
+                if (values.title.trim().length === 0 || tasks.length === 0) {
+                  return
+                } else {
+                  const newErrand = {
+                    title: values.title,
+                    errands: tasks
+                  }
+                  setErrands([...errands, newErrand])
+                  handleSetItem(newErrand)
+                  handleReset()
+                  handleModal()
                 }
-                setErrands([...errands, newErrand])
-                handleSetItem(newErrand)
-                handleReset()
-                handleModal()
               }}
             >
               save
@@ -103,7 +108,10 @@ const AddTodoButton = ({ handleModal, modal, errands, setErrands }) => {
         </div>
         <div>
           <h1 className="f2 tc">{values.title}</h1>
-          <ol className=" flex flex-column items-center list pl0 tc">
+          <ol
+            className="flex flex-column items-center list pl0 tc mw6-ns"
+            style={{ margin: 'auto' }}
+          >
             {tasks.length <= 0
               ? null
               : tasks.map((element, idx) => {
