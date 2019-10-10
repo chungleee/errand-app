@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/errand-app/precache-manifest.2f5b4e107c19c329d657b35eb7c3ce71.js"
+  "/errand-app/precache-manifest.72d3a4b46dc49187a4a513d5ff837b30.js"
 );
 
 self.addEventListener('message', (event) => {
